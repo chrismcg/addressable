@@ -368,7 +368,7 @@ module Addressable
         (sequence.unpack('C*').map { |c| "%" + ("%02x" % c).upcase }).join
       end
       if upcase_encoded.length > 0
-        component = component.gsub(/%(#{upcase_encoded.chars.map do |char|
+        component = component.gsub(/%(#{upcase_encoded.scan(/./m).map do |char|
           char.unpack('C*').map { |c| '%02x' % c }.join
         end.join('|')})/i) { |s| s.upcase }
       end
