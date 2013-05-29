@@ -498,7 +498,7 @@ module Addressable
         leave_re = if leave_encoded.length > 0
           character_class << '%'
 
-          "|%(?!#{leave_encoded.chars.map do |char|
+          "|%(?!#{leave_encoded.scan(/./m).map do |char|
             seq = char.unpack('C*').map { |c| '%02x' % c }.join
             [seq.upcase, seq.downcase]
           end.flatten.join('|')})"
